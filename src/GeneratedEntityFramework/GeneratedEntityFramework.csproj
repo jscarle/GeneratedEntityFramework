@@ -32,9 +32,9 @@
     <!-- Output -->
     <PropertyGroup>
         <AssemblyName>GeneratedEntityFramework</AssemblyName>
-        <Version>8.0.0</Version>
-        <AssemblyVersion>8.0.0.0</AssemblyVersion>
-        <FileVersion>8.0.0.0</FileVersion>
+        <Version>8.0.1</Version>
+        <AssemblyVersion>8.0.1.0</AssemblyVersion>
+        <FileVersion>8.0.1.0</FileVersion>
         <NeutralLanguage>en-US</NeutralLanguage>
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
