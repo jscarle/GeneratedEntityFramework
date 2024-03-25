@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DebugSourceGenerator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\..\\tests\\GeneratedEntityFramework.Tests.v8\\GeneratedEntityFramework.Tests.v8.csproj"
+    }
+  }
+}
