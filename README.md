@@ -1,6 +1,6 @@
 [![Banner](https://raw.githubusercontent.com/jscarle/GeneratedEntityFramework/main/Banner.png)](https://github.com/jscarle/GeneratedEntityFramework)
 
-# GeneratedEntityFramework - Generated implementations for Entity Framework Core
+# GeneratedEntityFramework - Generated interface implementations for Entity Framework Core
 
 GeneratedEntityFramework is a.NET source generator that automatically generates the `DbSet` implementations for a
 `DbContext` based on the properties of an interface. This greatly facilitates integration of Entity Framework within a

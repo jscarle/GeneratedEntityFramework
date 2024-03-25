@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 namespace GeneratedEntityFramework.Tests.v5.Fixtures;
 
 [GeneratedDbContext]
-public partial class InterfaceMappedDbContext(DbContextOptions options) : TestDbContext(options), IInterfaceMappedDbContextCustomers, IInterfaceMappedDbContextVendors;
+public partial class InterfaceMappedDbContext(DbContextOptions options)
+    : TestDbContext(options), IInterfaceMappedDbContextCustomers, IInterfaceMappedDbContextVendors;
 
 public interface IInterfaceMappedDbContextCustomers
 {

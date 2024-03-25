@@ -3,7 +3,7 @@
   "profiles": {
     "DebugSourceGenerator": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "..\\..\\tests\\GeneratedEntityFramework.Tests.v8\\GeneratedEntityFramework.Tests.v8.csproj"
+      "targetProject": "..\\..\\tests\\GeneratedEntityFramework.Tests.Lab\\GeneratedEntityFramework.Tests.Lab.csproj"
     }
   }
 }

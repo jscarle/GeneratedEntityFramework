@@ -11,8 +11,9 @@ namespace GeneratedEntityFramework;
 public sealed class EntityFrameworkGenerator : IIncrementalGenerator
 {
     private const string BaseNamespace = "GeneratedEntityFramework";
+    internal const string AttributesHint = $"{BaseNamespace}.Attributes.g.cs";
     private const string RegistrationClassName = "RegisterServices";
-    private const string RegistrationClassFullyQualifiedName = $"{BaseNamespace}.{RegistrationClassName}";
+    internal const string RegistrationClassHint = $"{BaseNamespace}.{RegistrationClassName}.g.cs";
     private const string RegistrationMethodName = "AddDbContextInterfaces";
     private const string DbContextAttributeName = "DbContextAttribute";
     private const string DbContextAttributeFullyQualifiedName = $"{BaseNamespace}.{DbContextAttributeName}";
@@ -37,7 +38,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        context.RegisterPostInitializationOutput(RegisterAttribute);
+        context.RegisterPostInitializationOutput(RegisterAttributes);
 
         var genericDbContexts = context.SyntaxProvider.ForAttributeWithMetadataName(
             $"{DbContextAttributeFullyQualifiedName}`1",
@@ -193,7 +194,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var ns = symbol.ContainingNamespace.ToDisplayString();
+        var ns = symbol.ContainingNamespace.IsGlobalNamespace ? "" : symbol.ContainingNamespace.ToDisplayString();
         var name = symbol.Name;
         var type = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
         var accessibility = symbol.DeclaredAccessibility;
@@ -229,7 +230,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var ns = symbol.ContainingNamespace.ToDisplayString();
+        var ns = symbol.ContainingNamespace.IsGlobalNamespace ? "" : symbol.ContainingNamespace.ToDisplayString();
         var name = symbol.Name;
         var type = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
         var accessibility = symbol.DeclaredAccessibility;
@@ -333,9 +334,8 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
         return new Property(name, type, argument, accessibility, asNoTracking);
     }
 
-    private static void RegisterAttribute(IncrementalGeneratorPostInitializationContext context)
+    private static void RegisterAttributes(IncrementalGeneratorPostInitializationContext context)
     {
-        const string hint = $"{BaseNamespace}.Attributes.gs.cs";
         var source = $$"""
                        {{FileHeader}}
 
@@ -343,7 +343,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                        {
 
                        #if NET7_0_OR_GREATER
-                       
+
                            /// <summary>
                            /// Marks an interface as being associated with a <see cref="Microsoft.EntityFrameworkCore.DbContext"/> of type
                            /// <typeparamref name="TDbContext"/>.
@@ -360,19 +360,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                where TDbContext : global::Microsoft.EntityFrameworkCore.DbContext
                            {
                            }
-                       
-                           /// <summary>
-                           /// Marks a <see cref="Microsoft.EntityFrameworkCore.DbContext"/> as being associated with an interface.
-                           /// </summary>
-                           /// <remarks>
-                           /// This attribute is used by the Entity Framework source generator to identify interfaces that should have corresponding
-                           /// <see cref="Microsoft.EntityFrameworkCore.DbContext"/> implementations generated.
-                           /// </remarks>
-                           [global::System.AttributeUsage(global::System.AttributeTargets.Class, AllowMultiple = true)]
-                           public sealed class {{GeneratedDbContextAttributeName}} : global::System.Attribute
-                           {
-                           }
-                       
+
                            /// <summary>
                            /// Marks a <see cref="Microsoft.EntityFrameworkCore.DbContext"/> as being associated with an interface.
                            /// </summary>
@@ -388,8 +376,8 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                            {
                            }
 
-                       #else
-                       
+                       #endif
+
                            /// <summary>
                            /// Marks an interface as being associated with a <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
                            /// </summary>
@@ -404,7 +392,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                /// Gets the type of the <see cref="Microsoft.EntityFrameworkCore.DbContext"/> associated with the marked interface.
                                /// <summary>
                                public global::System.Type DbContextType { get; }
-                       
+
                                /// <summary>Initializes a new instance of the <see cref="{{DbContextAttributeName}}"/> attribute.</summary>
                                /// <param name="dbContextType">
                                /// The type of the <see cref="Microsoft.EntityFrameworkCore.DbContext"/> associated with the marked interface.
@@ -414,7 +402,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                    DbContextType = dbContextType;
                                }
                            }
-                       
+
                            /// <summary>
                            /// Marks a <see cref="Microsoft.EntityFrameworkCore.DbContext"/> as being associated with an interface.
                            /// </summary>
@@ -429,13 +417,13 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                /// Gets the type of the interface associated with the marked <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
                                /// <summary>
                                public global::System.Type? InterfaceType { get; }
-                       
+
                                /// <summary>Initializes a new instance of the <see cref="{{GeneratedDbContextAttributeName}}"/> attribute.</summary>
                                public {{GeneratedDbContextAttributeName}}()
                                {
                                    InterfaceType = null;
                                }
-                       
+
                                /// <summary>Initializes a new instance of the <see cref="{{GeneratedDbContextAttributeName}}"/> attribute.</summary>
                                /// <param name="interfaceType">
                                /// The type of the interface associated with the marked <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
@@ -446,8 +434,6 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                }
                            }
 
-                       #endif
-                       
                            /// <summary>
                            /// Configures the service lifetime of interfaces associated with the marked <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
                            /// </summary>
@@ -462,7 +448,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                /// Gets the service lifetime of interfaces associated with the marked <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
                                /// <summary>
                                public global::Microsoft.Extensions.DependencyInjection.ServiceLifetime ServiceLifetime { get; }
-                       
+
                                /// <summary>Initializes a new instance of the <see cref="{{DbContextInterfaceLifetimeAttributeName}}"/> attribute.</summary>
                                /// <param name="serviceLifetime">
                                /// The service lifetime of interfaces associated with the marked <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
@@ -472,7 +458,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                    ServiceLifetime = serviceLifetime;
                                }
                            }
-                       
+
                            /// <summary>
                            /// Used to indicate that either all properties or a specific property of an interface should be generated with the
                            /// <see cref="System.Linq.IQueryable{T}"/> configured to return entities without tracking.
@@ -492,7 +478,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
 
                        """;
 
-        context.AddSource(hint, SourceText.From(source, Encoding.UTF8));
+        context.AddSource(AttributesHint, SourceText.From(source, Encoding.UTF8));
     }
 
     private static void GenerateSource(
@@ -550,10 +536,13 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
         source.AppendLine("using global::Microsoft.EntityFrameworkCore;");
         source.AppendLine();
 
-        source.Append("namespace ");
-        source.AppendLine(dbContext.DbContext.Namespace);
+        if (dbContext.DbContext.Namespace.Length > 0)
+        {
+            source.Append("namespace ");
+            source.AppendLine(dbContext.DbContext.Namespace);
 
-        source.AppendLine("{");
+            source.AppendLine("{");
+        }
 
         source.Append("    ");
         source.Append(AccessibilityKeyword(dbContext.DbContext.Accessibility));
@@ -632,9 +621,11 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
         }
 
         source.AppendLine("    }");
-        source.AppendLine("}");
 
-        var hint = $"{dbContext.DbContext.Namespace}.{dbContext.DbContext.Name}.g.cs";
+        if (dbContext.DbContext.Namespace.Length > 0)
+            source.AppendLine("}");
+
+        var hint = $"{(dbContext.DbContext.Namespace.Length > 0 ? $"{dbContext.DbContext.Namespace}" : "")}{dbContext.DbContext.Name}.g.cs";
         context.AddSource(hint, SourceText.From(source.ToString(), Encoding.UTF8));
     }
 
@@ -706,8 +697,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
 
         source.AppendLine("}");
 
-        const string hint = $"{RegistrationClassFullyQualifiedName}.g.cs";
-        context.AddSource(hint, SourceText.From(source.ToString(), Encoding.UTF8));
+        context.AddSource(RegistrationClassHint, SourceText.From(source.ToString(), Encoding.UTF8));
     }
 
     private static string ServiceLifetimeKeyword(ServiceLifetime serviceLifetime)

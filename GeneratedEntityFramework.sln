@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratedEntityFramework.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratedEntityFramework.Tests.v3", "tests\GeneratedEntityFramework.Tests.v3\GeneratedEntityFramework.Tests.v3.csproj", "{0BC02288-2B6F-441A-BB5D-2B4C4DC61704}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratedEntityFramework.Tests", "tests\GeneratedEntityFramework.Tests\GeneratedEntityFramework.Tests.csproj", "{324996A1-3376-447A-847E-F85CD7BA7FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratedEntityFramework.Tests.Lab", "tests\GeneratedEntityFramework.Tests.Lab\GeneratedEntityFramework.Tests.Lab.csproj", "{339347A5-A8DB-4BFA-AAE1-503DBB810CBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{0BC02288-2B6F-441A-BB5D-2B4C4DC61704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC02288-2B6F-441A-BB5D-2B4C4DC61704}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BC02288-2B6F-441A-BB5D-2B4C4DC61704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{324996A1-3376-447A-847E-F85CD7BA7FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324996A1-3376-447A-847E-F85CD7BA7FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324996A1-3376-447A-847E-F85CD7BA7FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324996A1-3376-447A-847E-F85CD7BA7FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{339347A5-A8DB-4BFA-AAE1-503DBB810CBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{339347A5-A8DB-4BFA-AAE1-503DBB810CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{339347A5-A8DB-4BFA-AAE1-503DBB810CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{339347A5-A8DB-4BFA-AAE1-503DBB810CBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3394E910-5575-41EB-92A8-EEF9A7F0F89C} = {F1E3D1D7-B9E4-4EFF-8FD5-2A735A4695B4}
@@ -51,5 +63,7 @@ Global
 		{E86C29DA-C59A-4BC8-9020-3EC1483A10D5} = {F1E3D1D7-B9E4-4EFF-8FD5-2A735A4695B4}
 		{B8939C28-28DD-48AE-931B-CDCB47CEF81C} = {F1E3D1D7-B9E4-4EFF-8FD5-2A735A4695B4}
 		{0BC02288-2B6F-441A-BB5D-2B4C4DC61704} = {F1E3D1D7-B9E4-4EFF-8FD5-2A735A4695B4}
+		{324996A1-3376-447A-847E-F85CD7BA7FBC} = {F1E3D1D7-B9E4-4EFF-8FD5-2A735A4695B4}
+		{339347A5-A8DB-4BFA-AAE1-503DBB810CBE} = {F1E3D1D7-B9E4-4EFF-8FD5-2A735A4695B4}
 	EndGlobalSection
 EndGlobal
