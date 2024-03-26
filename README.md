@@ -257,7 +257,7 @@ In the `GeneratedEntityFramework` namespace, an extension method named `AddDbCon
 with the `IServiceCollection` to register all of the interfaces against their respective DbContexts.
 
 ```csharp
-public static void AddDbContextInterfaces(this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+public static void AddDbContextInterfaces(this IServiceCollection services)
 {
     services.AddScoped<IBlogsContext>(sp => sp.GetRequiredService<BloggingContext>());
     services.AddScoped<IPostsContext>(sp => sp.GetRequiredService<BloggingContext>());

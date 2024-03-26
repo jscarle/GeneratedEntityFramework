@@ -230,13 +230,11 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var ns = symbol.ContainingNamespace.IsGlobalNamespace ? "" : symbol.ContainingNamespace.ToDisplayString();
-        var name = symbol.Name;
         var type = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
         var accessibility = symbol.DeclaredAccessibility;
         var properties = GetProperties(symbol, cancellationToken);
 
-        return new Interface(ns, name, type, accessibility, properties);
+        return new Interface(type, accessibility, properties);
     }
 
     private static EquatableImmutableArray<Property> GetProperties(INamedTypeSymbol interfaceSymbol, CancellationToken cancellationToken)
@@ -735,15 +733,11 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
     }
 
     private readonly record struct Interface(
-        string Namespace,
-        string Name,
         string Type,
         Accessibility Accessibility,
         EquatableImmutableArray<Property> Properties
     )
     {
-        public string Namespace { get; } = Namespace;
-        public string Name { get; } = Name;
         public string Type { get; } = Type;
         public Accessibility Accessibility { get; } = Accessibility;
         public EquatableImmutableArray<Property> Properties { get; } = Properties;
