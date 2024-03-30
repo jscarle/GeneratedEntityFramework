@@ -27,17 +27,20 @@
         </PackageReference>
         <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" PrivateAssets="all" GeneratePathProperty="true"/>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all"/>
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.23.0.88079">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <!-- Output -->
     <PropertyGroup>
         <AssemblyName>GeneratedEntityFramework</AssemblyName>
-        <Version>8.0.1</Version>
-        <AssemblyVersion>8.0.1.0</AssemblyVersion>
-        <FileVersion>8.0.1.0</FileVersion>
+        <Version>8.0.2</Version>
+        <AssemblyVersion>8.0.2.0</AssemblyVersion>
+        <FileVersion>8.0.2.0</FileVersion>
         <NeutralLanguage>en-US</NeutralLanguage>
         <IncludeBuildOutput>false</IncludeBuildOutput>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <!-- Package -->

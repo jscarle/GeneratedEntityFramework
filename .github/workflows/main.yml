@@ -58,20 +58,20 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Test v3
-        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v3/GeneratedEntityFramework.Tests.v3.csproj --configuration Release --no-build --verbosity normal --framework netcoreapp3.1
-
-      - name: Test v5
-        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v5/GeneratedEntityFramework.Tests.v5.csproj --configuration Release --no-build --verbosity normal --framework net5.0
-
-      - name: Test v6
-        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v6/GeneratedEntityFramework.Tests.v6.csproj --configuration Release --no-build --verbosity normal --framework net6.0
+      - name: Test v8
+        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v8/GeneratedEntityFramework.Tests.v8.csproj --configuration Release --no-build --verbosity normal --framework net8.0
 
       - name: Test v7
         run: dotnet test ./tests/GeneratedEntityFramework.Tests.v7/GeneratedEntityFramework.Tests.v7.csproj --configuration Release --no-build --verbosity normal --framework net7.0
 
-      - name: Test v8
-        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v8/GeneratedEntityFramework.Tests.v8.csproj --configuration Release --no-build --verbosity normal --framework net8.0
+      - name: Test v6
+        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v6/GeneratedEntityFramework.Tests.v6.csproj --configuration Release --no-build --verbosity normal --framework net6.0
+
+      - name: Test v5
+        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v5/GeneratedEntityFramework.Tests.v5.csproj --configuration Release --no-build --verbosity normal --framework net5.0
+
+      - name: Test v3
+        run: dotnet test ./tests/GeneratedEntityFramework.Tests.v3/GeneratedEntityFramework.Tests.v3.csproj --configuration Release --no-build --verbosity normal --framework netcoreapp3.1
 
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v3

@@ -389,7 +389,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                            {
                                /// <summary>
                                /// Gets the type of the <see cref="Microsoft.EntityFrameworkCore.DbContext"/> associated with the marked interface.
-                               /// <summary>
+                               /// </summary>
                                public global::System.Type DbContextType { get; }
 
                                /// <summary>Initializes a new instance of the <see cref="{{DbContextAttributeName}}"/> attribute.</summary>
@@ -414,7 +414,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                            {
                                /// <summary>
                                /// Gets the type of the interface associated with the marked <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
-                               /// <summary>
+                               /// </summary>
                                public global::System.Type? InterfaceType { get; }
 
                                /// <summary>Initializes a new instance of the <see cref="{{GeneratedDbContextAttributeName}}"/> attribute.</summary>
@@ -445,7 +445,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                            {
                                /// <summary>
                                /// Gets the service lifetime of interfaces associated with the marked <see cref="Microsoft.EntityFrameworkCore.DbContext"/>.
-                               /// <summary>
+                               /// </summary>
                                public global::Microsoft.Extensions.DependencyInjection.ServiceLifetime ServiceLifetime { get; }
 
                                /// <summary>Initializes a new instance of the <see cref="{{DbContextInterfaceLifetimeAttributeName}}"/> attribute.</summary>
