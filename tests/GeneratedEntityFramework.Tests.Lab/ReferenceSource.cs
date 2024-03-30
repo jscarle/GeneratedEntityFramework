@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
+// Resharper disable CheckNamespace
 namespace Microsoft.EntityFrameworkCore
 {
     public class DbContext;
@@ -25,8 +26,18 @@ namespace Microsoft.EntityFrameworkCore
         public Expression Expression { get; } = default!;
         public IQueryProvider Provider { get; } = default!;
     }
+
+    public static class EntityFrameworkQueryableExtensions
+    {
+        public static IQueryable<TEntity> AsNoTracking<TEntity>(this IQueryable<TEntity> source)
+            where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
+// Resharper disable CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
 {
     public interface IServiceCollection;
