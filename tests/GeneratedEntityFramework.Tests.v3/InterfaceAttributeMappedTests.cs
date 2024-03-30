@@ -5,12 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeneratedEntityFramework.Tests.v3;
 
-public sealed class InterfaceAttributeMappedTests(TestContainer<InterfaceAttributeMappedDbContext> container)
-    : TestBase<InterfaceAttributeMappedDbContext>, IAsyncLifetime
+public sealed class InterfaceAttributeMappedTests(TestContainer container) : TestBase, IAsyncLifetime
 {
     private static readonly AsyncLock Mutex = new();
     private static bool _seeded;
-    private readonly InterfaceAttributeMappedDbContext _dbContext = container.DbContext;
+    private static InterfaceAttributeMappedDbContext _dbContext = default!;
 
     public async Task InitializeAsync()
     {
@@ -19,9 +18,16 @@ public sealed class InterfaceAttributeMappedTests(TestContainer<InterfaceAttribu
             if (_seeded)
                 return;
 
+            var builder = new DbContextOptionsBuilder<InterfaceAttributeMappedDbContext>();
+            builder.UseSqlServer(container.ConnectionString);
+            _dbContext = new InterfaceAttributeMappedDbContext(builder.Options);
+
+            await _dbContext.Database.EnsureCreatedAsync();
+
             _dbContext.AddRange(GetCustomersSeedData());
             _dbContext.AddRange(GetVendorsSeedData());
             await _dbContext.SaveChangesAsync();
+
             _seeded = true;
         }
     }
@@ -94,7 +100,7 @@ public sealed class InterfaceAttributeMappedTests(TestContainer<InterfaceAttribu
     [Fact]
     public async Task ShouldNotTrackCustomerWithAsNoTrackAttribute()
     {
-        var existingCustomer = await _dbContext.DbSetCustomersAsNotTracking.FirstOrDefaultAsync(x => x.Id == 8);
+        var existingCustomer = await _dbContext.DbSetCustomersAsNoTracking.FirstOrDefaultAsync(x => x.Id == 8);
 
         existingCustomer.Should().NotBeNull().And.BeEquivalentTo(new { Id = 8, Name = "Sophia Wang" });
 
@@ -168,7 +174,7 @@ public sealed class InterfaceAttributeMappedTests(TestContainer<InterfaceAttribu
     [Fact]
     public async Task ShouldNotTrackVendorWithAsNoTrackAttribute()
     {
-        var existingVendor = await _dbContext.QueryableVendorsAsNotTracking.FirstOrDefaultAsync(x => x.Id == 8);
+        var existingVendor = await _dbContext.QueryableVendorsAsNoTracking.FirstOrDefaultAsync(x => x.Id == 8);
 
         existingVendor.Should().NotBeNull().And.BeEquivalentTo(new { Id = 8, Name = "Fitness Fusion Studio" });
 

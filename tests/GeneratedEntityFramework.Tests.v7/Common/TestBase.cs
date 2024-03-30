@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace GeneratedEntityFramework.Tests.v7.Common;
 
-namespace GeneratedEntityFramework.Tests.v7.Common;
-
-public class TestBase<TDbContext> : IClassFixture<TestContainer<TDbContext>>
-    where TDbContext : DbContext
+public class TestBase : IClassFixture<TestContainer>
 {
     protected IEnumerable<Customer> GetCustomersSeedData()
     {

@@ -7,12 +7,12 @@ namespace GeneratedEntityFramework.Tests.v3.Fixtures;
 public partial class InterfaceMappedDbContext(DbContextOptions options)
     : TestDbContext(options), IInterfaceMappedDbContextCustomers, IInterfaceMappedDbContextVendors;
 
+[AsNoTracking]
 public interface IInterfaceMappedDbContextCustomers
 {
     public DbSet<Customer> Customers { get; }
 
-    [AsNoTracking]
-    public IQueryable<Customer> DbSetCustomersAsNotTracking { get; }
+    public IQueryable<Customer> DbSetCustomersAsNoTracking { get; }
 }
 
 public interface IInterfaceMappedDbContextVendors
@@ -20,10 +20,10 @@ public interface IInterfaceMappedDbContextVendors
     public DbSet<Customer> Customers { get; }
 
     [AsNoTracking]
-    public IQueryable<Customer> DbSetCustomersAsNotTracking { get; }
+    public IQueryable<Customer> DbSetCustomersAsNoTracking { get; }
 
     public IQueryable<Vendor> Vendors { get; }
 
     [AsNoTracking]
-    public IQueryable<Vendor> QueryableVendorsAsNotTracking { get; }
+    public IQueryable<Vendor> QueryableVendorsAsNoTracking { get; }
 }

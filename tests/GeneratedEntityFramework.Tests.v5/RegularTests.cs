@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeneratedEntityFramework.Tests.v5;
 
-public sealed class RegularTests(TestContainer<RegularDbContext> container) : TestBase<RegularDbContext>, IAsyncLifetime
+public sealed class RegularTests(TestContainer container) : TestBase, IAsyncLifetime
 {
     private static readonly AsyncLock Mutex = new();
     private static bool _seeded;
-    private readonly RegularDbContext _dbContext = container.DbContext;
+    private static RegularDbContext _dbContext = default!;
 
     public async Task InitializeAsync()
     {
@@ -18,9 +18,16 @@ public sealed class RegularTests(TestContainer<RegularDbContext> container) : Te
             if (_seeded)
                 return;
 
+            var builder = new DbContextOptionsBuilder<RegularDbContext>();
+            builder.UseSqlServer(container.ConnectionString);
+            _dbContext = new RegularDbContext(builder.Options);
+
+            await _dbContext.Database.EnsureCreatedAsync();
+
             _dbContext.AddRange(GetCustomersSeedData());
             _dbContext.AddRange(GetVendorsSeedData());
             await _dbContext.SaveChangesAsync();
+
             _seeded = true;
         }
     }

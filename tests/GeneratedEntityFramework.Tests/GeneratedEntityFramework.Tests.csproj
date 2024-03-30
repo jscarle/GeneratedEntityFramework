@@ -27,7 +27,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="SourceGeneratorTestHelpers.XUnit" Version="8.1.0" />
+        <PackageReference Include="SourceGeneratorTestHelpers.XUnit" Version="8.1.0"/>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" PrivateAssets="all"/>
     </ItemGroup>
 
@@ -37,6 +37,105 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\GeneratedEntityFramework\GeneratedEntityFramework.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingDbSets_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.DbContext_UsingDbSets_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.DbContext_UsingDbSets_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingDbSetsAndIQueryables_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingDbSetsAndIQueryables_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.UsingIQueryables_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingDbSets_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingIQueryables_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingDbSetsAndIQueryables_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.UsingIQueryables_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingDbSets_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingDbSetsAndIQueryables_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingInterfaceAttributes_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingIQueryables_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.UsingDbSetsAndIQueryables_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingIQueryables_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingDbSets_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.UsingDbSetsAndIQueryables_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingInterfaceAttributes_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.UsingInterfaceAttributes_WithoutNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.UsingInterfaceAttributes_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.RegisterServices_UsingInterfaceAttributes_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingIQueryables_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
+        <None Update="ServiceLifetimeTests.Attributes_UsingInterfaceAttributes_WithNamespace.verified.txt">
+            <ParentFile>DbContextTests</ParentFile>
+            <DependentUpon>ServiceLifetimeTests.cs</DependentUpon>
+        </None>
     </ItemGroup>
 
 </Project>

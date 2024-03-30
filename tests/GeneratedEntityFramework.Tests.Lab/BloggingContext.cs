@@ -1,20 +1,18 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GeneratedEntityFramework.Tests.Lab;
 
-public partial class BloggingContext : DbContext;
+[GeneratedDbContext]
+[DbContextInterfaceLifetime(ServiceLifetime.Singleton)]
+public partial class BloggingContext : DbContext, IBloggingContext;
 
-[DbContext<BloggingContext>]
-public interface IBlogsContext
+[AsNoTracking]
+public interface IBloggingContext
 {
-    public IQueryable<Blog> Blogs { get; }
-}
-
-[DbContext<BloggingContext>]
-public interface IPostsContext
-{
-    public IQueryable<Post> Posts { get; }
+    public IQueryable<Blog> BlogsAsNoTracking { get; }
+    public IQueryable<Post> PostsAsNoTracking { get; }
 }
 
 public sealed class Blog;

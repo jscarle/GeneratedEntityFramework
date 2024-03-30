@@ -210,8 +210,9 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
 
         var serviceLifetime = ServiceLifetime.Scoped;
         var attributes = symbol.GetAttributes();
-        if (attributes is
-            [
+        foreach (var attribute in attributes)
+        {
+            if (attribute is
                 {
                     AttributeClass:
                     {
@@ -219,9 +220,9 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                         ContainingNamespace: { Name: BaseNamespace, ContainingNamespace.IsGlobalNamespace: true },
                     },
                     ConstructorArguments: [{ Value: int serviceLifetimeValue and >= 0 and <= 2 }],
-                },
-            ])
-            serviceLifetime = (ServiceLifetime)serviceLifetimeValue;
+                })
+                serviceLifetime = (ServiceLifetime)serviceLifetimeValue;
+        }
 
         return new DbContext(ns, name, type, accessibility, serviceLifetime, interfaces);
     }
@@ -249,13 +250,13 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
 
             if (IsDbSetProperty(member, out var dbSetProperty, out var dbSetArgument))
             {
-                var property = GetProperty(PropertyType.DbSet, dbSetProperty, dbSetArgument);
+                var property = GetProperty(interfaceSymbol, PropertyType.DbSet, dbSetProperty, dbSetArgument);
                 properties.Add(property);
             }
 
             if (IsIQueryableProperty(member, out var iQueryableProperty, out var iQueryableArgument))
             {
-                var property = GetProperty(PropertyType.IQueryable, iQueryableProperty, iQueryableArgument);
+                var property = GetProperty(interfaceSymbol, PropertyType.IQueryable, iQueryableProperty, iQueryableArgument);
                 properties.Add(property);
             }
         }
@@ -308,7 +309,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
         return false;
     }
 
-    private static Property GetProperty(PropertyType type, IPropertySymbol property, INamedTypeSymbol propertyArgument)
+    private static Property GetProperty(INamedTypeSymbol interfaceSymbol, PropertyType type, IPropertySymbol property, INamedTypeSymbol propertyArgument)
     {
         var name = property.Name;
         var argument = propertyArgument.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
@@ -318,16 +319,16 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
         if (type != PropertyType.IQueryable)
             return new Property(name, type, argument, accessibility, asNoTracking);
 
-        var attributes = property.GetAttributes();
-        asNoTracking = attributes is
-        [
+        var attributes = interfaceSymbol.GetAttributes().AddRange(property.GetAttributes());
+        asNoTracking = attributes.Any(
+            x => x is
             {
                 AttributeClass:
                 {
                     Name: AsNoTrackingAttributeName, ContainingNamespace: { Name: BaseNamespace, ContainingNamespace.IsGlobalNamespace: true },
                 },
-            },
-        ];
+            }
+        );
 
         return new Property(name, type, argument, accessibility, asNoTracking);
     }
@@ -397,7 +398,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                /// </param>
                                public {{DbContextAttributeName}}(global::System.Type dbContextType)
                                {
-                                   DbContextType = dbContextType;
+                                   this.DbContextType = dbContextType;
                                }
                            }
 
@@ -419,7 +420,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                /// <summary>Initializes a new instance of the <see cref="{{GeneratedDbContextAttributeName}}"/> attribute.</summary>
                                public {{GeneratedDbContextAttributeName}}()
                                {
-                                   InterfaceType = null;
+                                   this.InterfaceType = null;
                                }
 
                                /// <summary>Initializes a new instance of the <see cref="{{GeneratedDbContextAttributeName}}"/> attribute.</summary>
@@ -428,7 +429,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                /// </param>
                                public {{GeneratedDbContextAttributeName}}(global::System.Type interfaceType)
                                {
-                                   InterfaceType = interfaceType;
+                                   this.InterfaceType = interfaceType;
                                }
                            }
 
@@ -453,7 +454,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
                                /// </param>
                                public {{DbContextInterfaceLifetimeAttributeName}}(global::Microsoft.Extensions.DependencyInjection.ServiceLifetime serviceLifetime)
                                {
-                                   ServiceLifetime = serviceLifetime;
+                                   this.ServiceLifetime = serviceLifetime;
                                }
                            }
 
@@ -732,11 +733,7 @@ public sealed class EntityFrameworkGenerator : IIncrementalGenerator
         public EquatableImmutableArray<Interface> Interfaces { get; } = Interfaces;
     }
 
-    private readonly record struct Interface(
-        string Type,
-        Accessibility Accessibility,
-        EquatableImmutableArray<Property> Properties
-    )
+    private readonly record struct Interface(string Type, Accessibility Accessibility, EquatableImmutableArray<Property> Properties)
     {
         public string Type { get; } = Type;
         public Accessibility Accessibility { get; } = Accessibility;
