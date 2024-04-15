@@ -27,7 +27,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" PrivateAssets="all" GeneratePathProperty="true"/>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all"/>
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.23.1.88495">
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.23.2.88755">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
