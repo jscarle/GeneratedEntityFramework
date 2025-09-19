@@ -2,7 +2,7 @@
 
 # GeneratedEntityFramework - Generated interface implementations for Entity Framework Core
 
-GeneratedEntityFramework is a.NET source generator that automatically generates the `DbSet` implementations for a
+GeneratedEntityFramework is a .NET source generator that automatically generates the `DbSet` implementations for a
 `DbContext` based on the properties of an interface. This greatly facilitates integration of Entity Framework within a
 Clean Architecture (CA) or a Vertical Slice Architecture (VSA) by segmenting one or more DbContexts into one or more
 interfaces.
