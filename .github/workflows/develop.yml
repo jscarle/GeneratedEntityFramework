@@ -2,9 +2,11 @@ name: Release
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - develop
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - develop
 
 jobs:
   build:
@@ -20,35 +22,35 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: 'csharp'
 
       - name: Setup .NET 3.1
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 3.1.x
 
       - name: Setup .NET 5.0
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 5.x
 
       - name: Setup .NET 6.0
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 6.x
 
       - name: Setup .NET 7.0
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 7.x
 
       - name: Setup .NET 8.0
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.x
 
@@ -74,4 +76,4 @@ jobs:
         run: dotnet test ./tests/GeneratedEntityFramework.Tests.v3/GeneratedEntityFramework.Tests.v3.csproj --configuration Release --no-build --verbosity normal --framework netcoreapp3.1
 
       - name: Perform CodeQL analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4

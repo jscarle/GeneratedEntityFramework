@@ -1,4 +1,4 @@
-[![Banner](https://raw.githubusercontent.com/jscarle/GeneratedEntityFramework/main/Banner.png)](https://github.com/jscarle/GeneratedEntityFramework)
+[![Banner](https://raw.githubusercontent.com/jscarle/GeneratedEntityFramework/develop/Banner.png)](https://github.com/jscarle/GeneratedEntityFramework)
 
 # GeneratedEntityFramework - Generated interface implementations for Entity Framework Core
 
@@ -7,7 +7,7 @@ GeneratedEntityFramework is a .NET source generator that automatically generates
 Clean Architecture (CA) or a Vertical Slice Architecture (VSA) by segmenting one or more DbContexts into one or more
 interfaces.
 
-[![main](https://img.shields.io/github/actions/workflow/status/jscarle/GeneratedEntityFramework/main.yml?logo=github)](https://github.com/jscarle/GeneratedEntityFramework)
+[![develop](https://img.shields.io/github/actions/workflow/status/jscarle/GeneratedEntityFramework/develop.yml?logo=github)](https://github.com/jscarle/GeneratedEntityFramework)
 [![nuget](https://img.shields.io/nuget/v/GeneratedEntityFramework)](https://www.nuget.org/packages/GeneratedEntityFramework)
 [![downloads](https://img.shields.io/nuget/dt/GeneratedEntityFramework)](https://www.nuget.org/packages/GeneratedEntityFramework)
 

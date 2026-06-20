@@ -12,26 +12,27 @@ jobs:
       actions: read
       contents: read
       security-events: write
+      id-token: write
 
     strategy:
       fail-fast: false
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup .NET 6.0
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 6.x
 
     - name: Setup .NET 7.0
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 7.x
 
     - name: Setup .NET 8.0
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 8.x
 
@@ -44,5 +45,11 @@ jobs:
     - name: Pack
       run: dotnet pack ./src/GeneratedEntityFramework/GeneratedEntityFramework.csproj --configuration Release --no-build --output .
 
+    - name: NuGet Login
+      uses: NuGet/login@v1
+      id: nuget-login
+      with:
+        user: ${{secrets.NUGET_USER}}
+
     - name: Push to NuGet
-      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "*.nupkg" --api-key ${{steps.nuget-login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
