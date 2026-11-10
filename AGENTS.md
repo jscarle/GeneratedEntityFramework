@@ -12,7 +12,7 @@ Choose the next version using these repository-specific rules:
 
 - Minor, backward-compatible changes increment the patch component. Example: `8.0.2` → `8.0.3`.
 - Moderate or breaking changes increment the middle component and reset the patch. Example: `8.0.2` → `8.1.0`.
-- The major component matches the newest supported EF Core/.NET generation: EF Core 9 uses `9.x`, EF Core 10 uses `10.x`, and EF Core 11 uses `11.x`. When adding a generation, set the major component to that generation and reset the other components. If generations are skipped, skip the corresponding major versions too; do not merely increment the previous major by one.
+- The major component matches the newest supported EF Core generation: EF Core 9 uses `9.x`, EF Core 10 uses `10.x`, and EF Core 11 uses `11.x`. The SDK used to build or test does not determine the package major version. When adding a generation, set the major component to that generation and reset the other components. If generations are skipped, skip the corresponding major versions too; do not merely increment the previous major by one.
 - Breaking changes alone do not justify a major-version increment in this repository. If multiple categories apply, use the highest applicable category.
 
 Update `Version` in `src/GeneratedEntityFramework/GeneratedEntityFramework.csproj` using three components and update `AssemblyVersion` and `FileVersion` using the matching four-component form. Use a three-component lightweight tag such as `v8.0.3`; some historical tags are annotated, but new release tags must be lightweight.
