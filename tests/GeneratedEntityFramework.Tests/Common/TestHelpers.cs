@@ -1,4 +1,5 @@
-﻿using Basic.Reference.Assemblies;
+using System.Collections.Immutable;
+using Basic.Reference.Assemblies;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using SourceGeneratorTestHelpers;
@@ -7,11 +8,14 @@ namespace GeneratedEntityFramework.Tests.Common;
 
 public static class TestHelpers
 {
-    public static GeneratorDriverRunResult RunGenerator(IEnumerable<string> sources)
+    public static (ImmutableArray<Diagnostic> CompilationDiagnostics, GeneratorDriverRunResult Result) RunGenerator(IEnumerable<string> sources)
     {
-        var cSharpParseOptions = new CSharpParseOptions(LanguageVersion.CSharp11).WithPreprocessorSymbols("NET7_0_OR_GREATER");
-        var cSharpCompilationOptions = new CSharpCompilationOptions(OutputKind.NetModule).WithNullableContextOptions(NullableContextOptions.Enable);
-        return IncrementalGenerator.Run<EntityFrameworkGenerator>(sources, cSharpParseOptions, ReferenceAssemblies.Net80, cSharpCompilationOptions);
+        var cSharpParseOptions = new CSharpParseOptions(LanguageVersion.CSharp13).WithPreprocessorSymbols("NET7_0_OR_GREATER", "NET11_0_OR_GREATER");
+        var cSharpCompilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithNullableContextOptions(NullableContextOptions.Enable);
+        var (_, result, diagnostics) = IncrementalGenerator.RunWithDiagnostics<EntityFrameworkGenerator>(
+            sources, cSharpParseOptions, Net110.References.All, cSharpCompilationOptions);
+
+        return (diagnostics, result);
     }
 
     public static IEnumerable<string> GetSources(string source, bool withNamespace)
@@ -47,6 +51,15 @@ public static class TestHelpers
 
                      namespace Microsoft.EntityFrameworkCore
                      {
+                         public static class EntityFrameworkQueryableExtensions
+                         {
+                             public static IQueryable<TEntity> AsNoTracking<TEntity>(this IQueryable<TEntity> source)
+                                 where TEntity : class
+                             {
+                                 return source;
+                             }
+                         }
+
                          public class DbContext
                          {
                          }
@@ -64,52 +77,12 @@ public static class TestHelpers
                                  return GetEnumerator();
                              }
 
-                             public Type ElementType { get; }
-                             public Expression Expression { get; }
-                             public IQueryProvider Provider { get; }
+                             public Type ElementType { get; } = default!;
+                             public Expression Expression { get; } = default!;
+                             public IQueryProvider Provider { get; } = default!;
                          }
                      }
 
-                     namespace Microsoft.Extensions.DependencyInjection
-                     {
-                         public interface IServiceCollection
-                         {
-                         }
-
-                         public enum ServiceLifetime
-                         {
-                             Singleton = 0,
-                             Scoped = 1,
-                             Transient = 2,
-                         }
-
-                         public static class ServiceCollectionServiceExtensions
-                         {
-                             public static IServiceCollection AddSingleton<TService>(this IServiceCollection services, Func<IServiceProvider, TService> implementationFactory)
-                                 where TService : class
-                             {
-                                 throw new NotImplementedException();
-                             }
-
-                             public static IServiceCollection AddScoped<TService>(this IServiceCollection services, Func<IServiceProvider, TService> implementationFactory)
-                                 where TService : class
-                             {
-                                 throw new NotImplementedException();
-                             }
-
-                             public static IServiceCollection AddTransient<TService>(this IServiceCollection services, Func<IServiceProvider, TService> implementationFactory)
-                                 where TService : class
-                             {
-                                 throw new NotImplementedException();
-                             }
-
-                             public static T GetRequiredService<T>(this IServiceProvider provider)
-                                 where T : notnull, new()
-                             {
-                                 throw new NotImplementedException();
-                             }
-                         }
-                     }
                      """;
     }
 }

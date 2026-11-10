@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="PolySharp" Version="1.17.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="JetBrains.Annotations" Version="2026.2.0"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.1"/>
+        <PackageReference Include="coverlet.collector" Version="10.1.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="xunit.v3.mtp-off" Version="4.0.3"/>
+        <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="FluentAssertions" Version="8.11.0"/>
+        <PackageReference Include="FluentAssertions.Analyzers" Version="0.34.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <!-- Update SqlClient and its cryptography dependency independently of EF Core's minimum versions. -->
+        <PackageReference Include="System.Security.Cryptography.Pkcs" Version="11.0.0"/>
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.1"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0"/>
+        <PackageReference Include="Testcontainers.MsSql" Version="4.16.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="11.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\GeneratedEntityFramework\GeneratedEntityFramework.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit"/>
+    </ItemGroup>
+
+</Project>
