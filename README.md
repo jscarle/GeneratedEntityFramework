@@ -18,9 +18,10 @@ This source generator will generate source that is only compatible with
 [Dependency Injection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection) abstraction.
 
 Package major versions match the newest supported Entity Framework Core generation:
-version 9.x supports Entity Framework Core 9, and version 10.x adds Entity Framework Core 10 support.
+version 9.x supports Entity Framework Core 9, version 10.x adds Entity Framework Core 10 support,
+and version 11.x adds Entity Framework Core 11 support.
 
-Development and tests use the .NET 11 SDK. The integration suite targets Entity Framework Core 10 and runs against
+Development and tests use the .NET 11 SDK. The integration suite targets Entity Framework Core 11 and runs against
 SQL Server 2025 in Docker. The generator remains packaged for .NET Standard 2.0 and uses Roslyn 4.14.0.
 
 ## Getting Started
