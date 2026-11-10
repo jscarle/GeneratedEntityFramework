@@ -17,6 +17,9 @@ This source generator will generate source that is only compatible with
 [EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore) and Microsoft's
 [Dependency Injection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection) abstraction.
 
+Development and tests use the .NET 11 SDK. The integration suite targets Entity Framework Core 11 and runs against
+SQL Server 2025 in Docker. The generator remains packaged for .NET Standard 2.0 and uses Roslyn 4.14.0.
+
 ## Getting Started
 
 ### The Basics

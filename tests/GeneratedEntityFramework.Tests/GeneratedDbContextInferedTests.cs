@@ -3,14 +3,8 @@ using SourceGeneratorTestHelpers.XUnit;
 
 namespace GeneratedEntityFramework.Tests;
 
-[UsesVerify]
 public class GeneratedDbContextInferedTests
 {
-    public GeneratedDbContextInferedTests()
-    {
-        ModuleInitializer.Initialize();
-    }
-
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -39,11 +33,23 @@ public class GeneratedDbContextInferedTests
         );
         var result = TestHelpers.RunGenerator(sources);
 
-        await result.VerifyAsync(EntityFrameworkGenerator.AttributesHint)
-            .UseMethodName($"Attributes_{nameof(UsingDbSets)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync("BloggingContext.g.cs").UseMethodName($"DbContext_{nameof(UsingDbSets)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync(EntityFrameworkGenerator.RegistrationClassHint).UseMethodName(
-            $"RegisterServices_{nameof(UsingDbSets)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.AttributesHint,
+            snapshotName: $"GeneratedDbContextInferedTests.Attributes_{nameof(UsingDbSets)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            "BloggingContext.g.cs",
+            snapshotName: $"GeneratedDbContextInferedTests.DbContext_{nameof(UsingDbSets)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.RegistrationClassHint,
+            snapshotName: $"GeneratedDbContextInferedTests.RegisterServices_{nameof(UsingDbSets)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
     }
 
@@ -75,14 +81,23 @@ public class GeneratedDbContextInferedTests
         );
         var result = TestHelpers.RunGenerator(sources);
 
-        await result.VerifyAsync(EntityFrameworkGenerator.AttributesHint).UseMethodName(
-            $"Attributes_{nameof(UsingDbSetsAndIQueryables)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.AttributesHint,
+            snapshotName: $"GeneratedDbContextInferedTests.Attributes_{nameof(UsingDbSetsAndIQueryables)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
-        await result.VerifyAsync("BloggingContext.g.cs").UseMethodName(
-            $"DbContext_{nameof(UsingDbSetsAndIQueryables)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            "BloggingContext.g.cs",
+            snapshotName: $"GeneratedDbContextInferedTests.DbContext_{nameof(UsingDbSetsAndIQueryables)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
-        await result.VerifyAsync(EntityFrameworkGenerator.RegistrationClassHint).UseMethodName(
-            $"RegisterServices_{nameof(UsingDbSetsAndIQueryables)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.RegistrationClassHint,
+            snapshotName: $"GeneratedDbContextInferedTests.RegisterServices_{nameof(UsingDbSetsAndIQueryables)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
     }
 
@@ -114,12 +129,23 @@ public class GeneratedDbContextInferedTests
         );
         var result = TestHelpers.RunGenerator(sources);
 
-        await result.VerifyAsync(EntityFrameworkGenerator.AttributesHint).UseMethodName(
-            $"Attributes_{nameof(UsingIQueryables)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.AttributesHint,
+            snapshotName: $"GeneratedDbContextInferedTests.Attributes_{nameof(UsingIQueryables)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
-        await result.VerifyAsync("BloggingContext.g.cs").UseMethodName($"DbContext_{nameof(UsingIQueryables)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync(EntityFrameworkGenerator.RegistrationClassHint).UseMethodName(
-            $"RegisterServices_{nameof(UsingIQueryables)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            "BloggingContext.g.cs",
+            snapshotName: $"GeneratedDbContextInferedTests.DbContext_{nameof(UsingIQueryables)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.RegistrationClassHint,
+            snapshotName: $"GeneratedDbContextInferedTests.RegisterServices_{nameof(UsingIQueryables)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
     }
 
@@ -150,14 +176,23 @@ public class GeneratedDbContextInferedTests
         );
         var result = TestHelpers.RunGenerator(sources);
 
-        await result.VerifyAsync(EntityFrameworkGenerator.AttributesHint).UseMethodName(
-            $"Attributes_{nameof(UsingInterfaceAttributes)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.AttributesHint,
+            snapshotName: $"GeneratedDbContextInferedTests.Attributes_{nameof(UsingInterfaceAttributes)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
-        await result.VerifyAsync("BloggingContext.g.cs").UseMethodName(
-            $"DbContext_{nameof(UsingInterfaceAttributes)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            "BloggingContext.g.cs",
+            snapshotName: $"GeneratedDbContextInferedTests.DbContext_{nameof(UsingInterfaceAttributes)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
-        await result.VerifyAsync(EntityFrameworkGenerator.RegistrationClassHint).UseMethodName(
-            $"RegisterServices_{nameof(UsingInterfaceAttributes)}_With{(withNamespace ? "" : "out")}Namespace"
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.RegistrationClassHint,
+            snapshotName: $"GeneratedDbContextInferedTests.RegisterServices_{nameof(UsingInterfaceAttributes)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
         );
     }
 }

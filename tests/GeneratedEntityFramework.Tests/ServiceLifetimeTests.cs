@@ -3,14 +3,8 @@ using SourceGeneratorTestHelpers.XUnit;
 
 namespace GeneratedEntityFramework.Tests;
 
-[UsesVerify]
 public class ServiceLifetimeTests
 {
-    public ServiceLifetimeTests()
-    {
-        ModuleInitializer.Initialize();
-    }
-
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -37,11 +31,24 @@ public class ServiceLifetimeTests
         );
         var result = TestHelpers.RunGenerator(sources);
 
-        await result.VerifyAsync(EntityFrameworkGenerator.AttributesHint)
-            .UseMethodName($"Attributes_{nameof(Singleton)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync("BloggingContext.g.cs").UseMethodName($"DbContext_{nameof(Singleton)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync(EntityFrameworkGenerator.RegistrationClassHint)
-            .UseMethodName($"RegisterServices_{nameof(Singleton)}_With{(withNamespace ? "" : "out")}Namespace");
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.AttributesHint,
+            snapshotName: $"ServiceLifetimeTests.Attributes_{nameof(Singleton)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            "BloggingContext.g.cs",
+            snapshotName: $"ServiceLifetimeTests.DbContext_{nameof(Singleton)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.RegistrationClassHint,
+            snapshotName: $"ServiceLifetimeTests.RegisterServices_{nameof(Singleton)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
     }
 
     [Theory]
@@ -70,11 +77,24 @@ public class ServiceLifetimeTests
         );
         var result = TestHelpers.RunGenerator(sources);
 
-        await result.VerifyAsync(EntityFrameworkGenerator.AttributesHint)
-            .UseMethodName($"Attributes_{nameof(Scoped)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync("BloggingContext.g.cs").UseMethodName($"DbContext_{nameof(Scoped)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync(EntityFrameworkGenerator.RegistrationClassHint)
-            .UseMethodName($"RegisterServices_{nameof(Scoped)}_With{(withNamespace ? "" : "out")}Namespace");
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.AttributesHint,
+            snapshotName: $"ServiceLifetimeTests.Attributes_{nameof(Scoped)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            "BloggingContext.g.cs",
+            snapshotName: $"ServiceLifetimeTests.DbContext_{nameof(Scoped)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.RegistrationClassHint,
+            snapshotName: $"ServiceLifetimeTests.RegisterServices_{nameof(Scoped)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
     }
 
     [Theory]
@@ -103,10 +123,23 @@ public class ServiceLifetimeTests
         );
         var result = TestHelpers.RunGenerator(sources);
 
-        await result.VerifyAsync(EntityFrameworkGenerator.AttributesHint)
-            .UseMethodName($"Attributes_{nameof(Transient)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync("BloggingContext.g.cs").UseMethodName($"DbContext_{nameof(Transient)}_With{(withNamespace ? "" : "out")}Namespace");
-        await result.VerifyAsync(EntityFrameworkGenerator.RegistrationClassHint)
-            .UseMethodName($"RegisterServices_{nameof(Transient)}_With{(withNamespace ? "" : "out")}Namespace");
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.AttributesHint,
+            snapshotName: $"ServiceLifetimeTests.Attributes_{nameof(Transient)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            "BloggingContext.g.cs",
+            snapshotName: $"ServiceLifetimeTests.DbContext_{nameof(Transient)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
+        await result.VerifyAsync(
+            EntityFrameworkGenerator.RegistrationClassHint,
+            snapshotName: $"ServiceLifetimeTests.RegisterServices_{nameof(Transient)}_With{(withNamespace ? "" : "out")}Namespace",
+            assertOnWarnings: true,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
     }
 }

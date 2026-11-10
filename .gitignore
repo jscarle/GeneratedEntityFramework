@@ -1,6 +1,7 @@
 # Build results
 bin/
 obj/
+*.received.txt
 
 # Visual Studio files
 .vs
